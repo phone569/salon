@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Almarouf Beauty Salon — Attock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Parisienne&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf5f1;
+    --surface:#ffffff;
+    --surface-2:#f4e6df;
+    --rose:#c98a7d;
+    --rose-deep:#9c5c4f;
+    --gold:#bb8c4f;
+    --gold-light:#e3c088;
+    --ink:#2c2320;
+    --muted:#8d7871;
+    --line:rgba(187,140,79,0.28);
+    --shadow:0 26px 60px rgba(156,92,79,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Poppins', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--rose); color:#fff;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  h1,h2,h3{font-family:'Playfair Display', serif; font-weight:500; color:var(--ink);}
+  .script{font-family:'Parisienne', cursive; color:var(--rose-deep); font-weight:400;}
+  .eyebrow{
+    font-family:'Poppins', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.3em;
+    font-size:11px;
+    color:var(--rose-deep);
+    display:flex; align-items:center; gap:14px;
+  }
+  .eyebrow::before{content:''; width:28px; height:1px; background:var(--gold);}
+  ::-webkit-scrollbar{width:9px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--rose); border-radius:6px;}
+
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity 0.9s ease, transform 0.9s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+
+  /* topbar */
+  .topbar{background:var(--ink); color:var(--gold-light); font-size:12px; letter-spacing:0.08em; padding:9px 0; overflow:hidden;}
+  .marquee{display:flex; gap:60px; white-space:nowrap; animation:scroll-marquee 22s linear infinite; width:max-content;}
+  @keyframes scroll-marquee{from{transform:translateX(0);} to{transform:translateX(-50%);}}
+  .marquee span b{color:#fff; font-weight:500;}
+
+  /* nav */
+  header.nav{position:sticky; top:0; z-index:200; background:rgba(251,245,241,0.88); backdrop-filter:blur(14px); border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 32px; max-width:1180px; margin:0 auto;}
+  .logo{display:flex; align-items:center; gap:12px;}
+  .logo-mark{width:44px; height:44px; border-radius:50%; border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; font-family:'Parisienne', cursive; font-size:22px; color:var(--rose-deep);}
+  .logo-word{font-family:'Playfair Display', serif; font-size:19px; letter-spacing:0.06em;}
+  .logo-word small{display:block; font-family:'Poppins',sans-serif; font-size:9px; letter-spacing:0.28em; color:var(--muted); font-weight:400; margin-top:2px;}
+  nav.links{display:flex; gap:34px; font-size:13px; letter-spacing:0.04em;}
+  nav.links a{position:relative; padding:4px 0; opacity:0.85; transition:opacity .3s;}
+  nav.links a:hover{opacity:1;}
+  nav.links a::after{content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--rose-deep); transition:width .35s ease;}
+  nav.links a:hover::after{width:100%;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 26px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; border:1px solid var(--rose-deep); color:var(--rose-deep); border-radius:2px; transition:all .35s ease; background:transparent; cursor:pointer;}
+  .btn:hover{background:var(--rose-deep); color:#fff;}
+  .btn.solid{background:var(--rose-deep); color:#fff;}
+  .btn.solid:hover{background:var(--ink);}
+  .nav-cta{display:none;}
+  @media(min-width:900px){.nav-cta{display:inline-flex;}}
+  .burger{display:flex; width:24px; height:18px; flex-direction:column; justify-content:space-between; cursor:pointer;}
+  .burger span{height:1px; background:var(--rose-deep); display:block;}
+  @media(min-width:900px){.burger{display:none;}}
+  @media(max-width:899px){nav.links{display:none;}}
+
+  /* hero */
+  .hero{position:relative; min-height:100vh; display:flex; align-items:center; padding:110px 32px 70px;
+    background:radial-gradient(ellipse at 80% 10%, rgba(227,192,136,0.28), transparent 55%), radial-gradient(ellipse at 10% 90%, rgba(201,138,125,0.22), transparent 55%), var(--bg);
+  }
+  .hero-grid{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; width:100%;}
+  @media(max-width:940px){.hero-grid{grid-template-columns:1fr;}}
+  .hero .eyebrow{margin-bottom:6px;}
+  .hero h1{font-size:clamp(38px,5.6vw,64px); line-height:1.08;}
+  .hero h1 .script{font-size:1.25em; display:inline-block;}
+  .hero p.lead{margin-top:20px; max-width:440px; color:var(--muted); font-size:16px; line-height:1.8;}
+  .hero-cta{display:flex; gap:16px; margin-top:34px; flex-wrap:wrap;}
+  .hero-note{margin-top:34px; display:flex; gap:30px; flex-wrap:wrap;}
+  .hero-note div{font-size:12px; color:var(--muted); letter-spacing:0.03em;}
+  .hero-note div b{display:block; color:var(--rose-deep); font-family:'Playfair Display',serif; font-size:19px; font-weight:500;}
+
+  /* hero portrait medallion */
+  .medallion-outer{perspective:1300px; display:flex; align-items:center; justify-content:center; height:480px;}
+  .medallion{position:relative; width:340px; height:340px; transform-style:preserve-3d; transition:transform .25s ease-out;}
+  .med-photo{position:absolute; inset:26px; border-radius:50%; overflow:hidden; box-shadow:var(--shadow); transform:translateZ(20px);}
+  .med-photo img{width:100%; height:100%; object-fit:cover;}
+  .med-ring{position:absolute; inset:0; border-radius:50%; border:1px solid var(--gold); transform-style:preserve-3d;}
+  .med-ring.r1{animation:spin 30s linear infinite;}
+  .med-ring.r2{inset:-24px; border:1px solid var(--line); animation:spin-rev 40s linear infinite;}
+  @keyframes spin{from{transform:rotateZ(0);} to{transform:rotateZ(360deg);}}
+  @keyframes spin-rev{from{transform:rotateZ(360deg);} to{transform:rotateZ(0);}}
+  .petal{position:absolute; width:14px; height:14px; border-radius:50% 0 50% 50%; background:linear-gradient(135deg,var(--gold-light),var(--rose)); transform-style:preserve-3d;}
+  .petal:nth-child(1){top:50%; left:50%; transform:rotateZ(0deg) translateX(190px) translateZ(10px) rotate(20deg);}
+  .petal:nth-child(2){top:50%; left:50%; transform:rotateZ(72deg) translateX(190px) translateZ(10px) rotate(20deg);}
+  .petal:nth-child(3){top:50%; left:50%; transform:rotateZ(144deg) translateX(190px) translateZ(10px) rotate(20deg);}
+  .petal:nth-child(4){top:50%; left:50%; transform:rotateZ(216deg) translateX(190px) translateZ(10px) rotate(20deg);}
+  .petal:nth-child(5){top:50%; left:50%; transform:rotateZ(288deg) translateX(190px) translateZ(10px) rotate(20deg);}
+
+  .scroll-cue{position:absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--muted); font-size:10px; letter-spacing:0.3em; text-transform:uppercase;}
+  .scroll-cue .line{width:1px; height:36px; background:linear-gradient(var(--rose-deep), transparent); animation:pulse-line 1.8s ease-in-out infinite;}
+  @keyframes pulse-line{0%,100%{opacity:.3;} 50%{opacity:1;}}
+
+  section{padding:110px 0;}
+  .section-head{max-width:640px; margin:0 auto 60px;}
+  .section-head.center{text-align:center; margin-left:auto; margin-right:auto;}
+  .section-head h2{font-size:clamp(28px,3.6vw,42px); margin-top:14px; line-height:1.25;}
+  .section-head p{color:var(--muted); margin-top:16px; font-size:15px; line-height:1.75;}
+
+  /* about */
+  .about{background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-grid{display:grid; grid-template-columns:0.95fr 1.05fr; gap:64px; align-items:center;}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;}}
+  .about-photo{position:relative; height:460px; border-radius:6px; overflow:hidden; box-shadow:var(--shadow);}
+  .about-photo img{width:100%; height:100%; object-fit:cover;}
+  .about-photo::after{content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(44,35,32,0.35), transparent 40%);}
+  .about-photo .credit{position:absolute; left:20px; bottom:16px; color:#fff; font-size:11px; letter-spacing:0.08em; opacity:0.85;}
+  .about-copy p{color:var(--muted); line-height:1.85; font-size:15px; margin-top:16px;}
+  .stat-row{display:flex; gap:44px; margin-top:36px; flex-wrap:wrap;}
+  .stat-row div b{display:block; font-family:'Playfair Display', serif; font-size:26px; color:var(--rose-deep); font-weight:500;}
+  .stat-row div span{font-size:11.5px; letter-spacing:0.05em; color:var(--muted); text-transform:uppercase;}
+
+  /* services */
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  @media(max-width:900px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.services-grid{grid-template-columns:1fr;}}
+  .svc-card{border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--surface); transition:transform .45s ease, box-shadow .45s ease;}
+  .svc-card:hover{transform:translateY(-8px); box-shadow:var(--shadow);}
+  .svc-top{height:170px; position:relative; overflow:hidden;}
+  .svc-top img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease;}
+  .svc-card:hover .svc-top img{transform:scale(1.08);}
+  .svc-body{padding:24px 24px 28px;}
+  .svc-body .num{font-family:'Playfair Display', serif; font-style:italic; color:var(--rose-deep); font-size:12px;}
+  .svc-body h3{font-size:19px; margin-top:8px;}
+  .svc-body p{font-size:13.5px; color:var(--muted); margin-top:8px; line-height:1.65;}
+
+  /* gallery */
+  .gallery{background:var(--surface-2);}
+  .gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  @media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+  .gphoto{position:relative; border-radius:6px; overflow:hidden; height:320px; perspective:900px;}
+  .gphoto img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease;}
+  .gphoto:hover img{transform:scale(1.1) rotate(1deg);}
+  .gphoto .tag{position:absolute; left:16px; bottom:14px; color:#fff; font-family:'Playfair Display', serif; font-size:17px; z-index:2;}
+  .gphoto .tag small{display:block; font-family:'Poppins',sans-serif; font-size:9px; letter-spacing:0.22em; color:var(--gold-light); margin-bottom:4px;}
+  .gphoto::before{content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.55), transparent 55%); z-index:1;}
+  .gphoto:nth-child(2){margin-top:34px;}
+  .gphoto:nth-child(4){margin-top:34px;}
+
+  /* process */
+  .process-list{display:grid; grid-template-columns:repeat(4,1fr); gap:0;}
+  @media(max-width:900px){.process-list{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.process-list{grid-template-columns:1fr;}}
+  .process-item{padding:28px 24px; border-left:1px solid var(--line);}
+  .process-item:first-child{border-left:none;}
+  .process-item .pnum{font-family:'Playfair Display', serif; font-style:italic; font-size:14px; color:var(--gold);}
+  .process-item h3{font-size:17px; margin-top:12px;}
+  .process-item p{color:var(--muted); font-size:13.5px; margin-top:8px; line-height:1.7;}
+
+  /* testimonials */
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media(max-width:900px){.testi-grid{grid-template-columns:1fr;}}
+  .testi-card{border:1px solid var(--line); border-radius:6px; padding:30px; background:var(--surface);}
+  .stars{color:var(--gold); letter-spacing:3px; font-size:13px;}
+  .testi-card p{margin-top:14px; color:var(--ink); font-family:'Cormorant Garamond', serif; font-style:italic; font-size:18px; line-height:1.7;}
+  .testi-who{display:flex; align-items:center; gap:10px; margin-top:18px;}
+  .testi-avatar{width:34px; height:34px; border-radius:50%; background:var(--surface-2); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:13px; color:var(--rose-deep);}
+  .testi-who span{font-size:11.5px; letter-spacing:0.05em; color:var(--muted); text-transform:uppercase;}
+
+  /* contact */
+  .contact{background:var(--ink); color:#f4e9e0;}
+  .contact .eyebrow{color:var(--gold-light);}
+  .contact .eyebrow::before{background:var(--gold-light);}
+  .contact h2{color:#fff;}
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch;}
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  .info-row{display:flex; gap:16px; padding:18px 0; border-bottom:1px solid rgba(227,192,136,0.18);}
+  .info-row svg{width:19px; height:19px; stroke:var(--gold-light); flex-shrink:0; margin-top:3px;}
+  .info-row b{display:block; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-light); margin-bottom:4px;}
+  .info-row span{color:#d8c8bf; font-size:14px; line-height:1.6;}
+  .contact-photo{position:relative; border-radius:6px; overflow:hidden; min-height:320px;}
+  .contact-photo img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+  .map-frame{border-radius:6px; overflow:hidden; height:220px; margin-top:16px; filter:sepia(0.2) saturate(0.8);}
+  .map-frame iframe{width:100%; height:100%; border:0;}
+
+  footer{padding:44px 0 26px; text-align:center; background:var(--ink); color:#d8c8bf;}
+  footer .logo-word{justify-content:center; display:flex; margin-bottom:16px; color:#fff;}
+  .foot-links{display:flex; gap:24px; justify-content:center; margin:18px 0; font-size:13px; flex-wrap:wrap;}
+  .foot-note{color:#a5928a; font-size:11.5px; margin-top:16px;}
+
+  .float-wa{position:fixed; bottom:26px; right:26px; z-index:300; width:58px; height:58px; border-radius:50%; background:linear-gradient(160deg, var(--rose-deep), var(--ink)); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); animation:float-bob 3s ease-in-out infinite;}
+  .float-wa svg{width:26px; height:26px; fill:#fff;}
+  @keyframes float-bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="marquee">
+      <span>✿ ALMAROUF BEAUTY SALON <b>·</b> Attock, Punjab</span>
+      <span>Call / WhatsApp <b>0310&nbsp;8173238</b></span>
+      <span>Bridal Bookings Open</span>
+      <span>✿ ALMAROUF BEAUTY SALON <b>·</b> Attock, Punjab</span>
+      <span>Call / WhatsApp <b>0310&nbsp;8173238</b></span>
+      <span>Bridal Bookings Open</span>
+    </div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-mark">A</div>
+      <div class="logo-word">Almarouf<small>BEAUTY SALON</small></div>
+    </div>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn nav-cta" href="https://wa.me/923108173238" target="_blank">Book Now</a>
+    <div class="burger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="reveal visible">
+      <div class="eyebrow">ATTOCK'S SIGNATURE BEAUTY HOUSE</div>
+      <h1>Bridal beauty,<br><span class="script">beautifully done</span></h1>
+      <p class="lead">Hair, bridal makeup, skin and nail artistry crafted with a gentle hand — Almarouf Beauty Salon brings a refined studio experience to Attock.</p>
+      <div class="hero-cta">
+        <a class="btn solid" href="https://wa.me/923108173238" target="_blank">Book on WhatsApp</a>
+        <a class="btn" href="tel:03108173238">Call 0310 8173238</a>
+      </div>
+      <div class="hero-note">
+        <div><b>Bridal</b>Trials &amp; Day-Of</div>
+        <div><b>Hair &amp; Skin</b>Full Service Studio</div>
+        <div><b>Private</b>Ladies-Only</div>
+      </div>
+    </div>
+
+    <div class="medallion-outer">
+      <div class="medallion" id="medallion">
+        <div class="med-ring r2"></div>
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="med-ring r1"></div>
+        <div class="med-photo">
+          <img src="https://images.unsplash.com/photo-1742891601435-39de27531cc7?auto=format&fit=crop&w=900&q=80" alt="Bridal makeup look">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
+</section>
+
+<!-- about -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo reveal">
+      <img src="https://images.unsplash.com/photo-1762201786237-de79e3b5b1b6?auto=format&fit=crop&w=900&q=80" alt="Bride in red and gold bridal outfit">
+      <div class="credit">Almarouf Beauty Salon</div>
+    </div>
+    <div class="about-copy reveal">
+      <div class="eyebrow">THE ALMAROUF STANDARD</div>
+      <h2>A studio built on craft, care and detail</h2>
+      <p>Almarouf Beauty Salon is a full-service beauty studio in Attock, dedicated to hair, bridal, skin and nail artistry. Every service is approached with patience and precision — from an everyday trim to a full bridal transformation.</p>
+      <p>We work with premium products and hygienic, private treatment stations, so every visit feels as calm as it is beautiful.</p>
+      <div class="stat-row">
+        <div><b>Bridal</b><span>Trials &amp; Day-Of</span></div>
+        <div><b>Private</b><span>Ladies-Only Studio</span></div>
+        <div><b>Custom</b><span>Tailored Looks</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- services -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="justify-content:center;">OUR SERVICES</div>
+      <h2>Crafted for every occasion</h2>
+      <p>Every treatment can be tailored during your consultation.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc-card reveal">
+        <div class="svc-top"><img src="https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?auto=format&fit=crop&w=700&q=80" alt="Hair styling"></div>
+        <div class="svc-body"><span class="num">01</span><h3>Hair Styling &amp; Color</h3><p>Cuts, blow-dry, keratin, coloring &amp; highlights tailored to your face shape.</p></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top"><img src="https://images.unsplash.com/photo-1753597944233-d12e4aa49bd8?auto=format&fit=crop&w=700&q=80" alt="Bridal makeup"></div>
+        <div class="svc-body"><span class="num">02</span><h3>Bridal &amp; Party Makeup</h3><p>HD &amp; airbrush makeup, trials, and full day-of bridal packages.</p></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top"><img src="https://images.unsplash.com/photo-1761718209794-e0588aafbcc4?auto=format&fit=crop&w=700&q=80" alt="Skin care"></div>
+        <div class="svc-body"><span class="num">03</span><h3>Facials &amp; Skin Care</h3><p>Cleansing facials, brightening treatments, threading &amp; bleach.</p></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top"><img src="https://images.unsplash.com/photo-1727199433231-346fd8101839?auto=format&fit=crop&w=700&q=80" alt="Nail care"></div>
+        <div class="svc-body"><span class="num">04</span><h3>Nail Care</h3><p>Manicure, pedicure, nail art &amp; gel polish in a relaxed setting.</p></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top"><img src="https://images.unsplash.com/photo-1742891601435-39de27531cc7?auto=format&fit=crop&w=700&q=80" alt="Henna and mehndi"></div>
+        <div class="svc-body"><span class="num">05</span><h3>Henna &amp; Mehndi</h3><p>Traditional &amp; modern bridal mehndi designs, freehand and detailed.</p></div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-top"><img src="https://images.unsplash.com/photo-1625055887171-4a3186a42b39?auto=format&fit=crop&w=700&q=80" alt="Spa and relaxation"></div>
+        <div class="svc-body"><span class="num">06</span><h3>Spa &amp; Relaxation</h3><p>Body massage, hair spa &amp; steam treatments to unwind and restore.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- gallery -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">SIGNATURE LOOKS</div>
+      <h2>A glimpse of our style</h2>
+      <p style="font-size:12.5px; opacity:0.65;">Stock photography shown for style reference — swap in your own client photos anytime.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gphoto reveal">
+        <img src="https://images.unsplash.com/photo-1762201786237-de79e3b5b1b6?auto=format&fit=crop&w=700&q=80" alt="Bridal look">
+        <div class="tag"><small>Bridal</small>Day-Of Glam</div>
+      </div>
+      <div class="gphoto reveal">
+        <img src="https://images.unsplash.com/photo-1753597944233-d12e4aa49bd8?auto=format&fit=crop&w=700&q=80" alt="Party makeup">
+        <div class="tag"><small>Party</small>Evening Makeup</div>
+      </div>
+      <div class="gphoto reveal">
+        <img src="https://images.unsplash.com/photo-1762201786237-de79e3b5b1b6?auto=format&fit=crop&w=700&q=80" alt="Traditional bridal">
+        <div class="tag"><small>Bridal</small>Traditional Look</div>
+      </div>
+      <div class="gphoto reveal">
+        <img src="https://images.unsplash.com/photo-1742891601435-39de27531cc7?auto=format&fit=crop&w=700&q=80" alt="Gold bridal outfit">
+        <div class="tag"><small>Bridal</small>Gold Detail</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- process -->
+<section>
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="justify-content:center;">HOW BOOKING WORKS</div>
+      <h2>Simple, from message to mirror</h2>
+    </div>
+    <div class="process-list">
+      <div class="process-item reveal"><div class="pnum">01</div><h3>Message Us</h3><p>Reach out on WhatsApp or call to share what you're after.</p></div>
+      <div class="process-item reveal"><div class="pnum">02</div><h3>Book a Slot</h3><p>We confirm a time that suits you — walk-ins welcome too.</p></div>
+      <div class="process-item reveal"><div class="pnum">03</div><h3>Consultation</h3><p>A quick chat before we begin, so the result matches your vision.</p></div>
+      <div class="process-item reveal"><div class="pnum">04</div><h3>Reveal</h3><p>Step out feeling every bit as radiant as you look.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- testimonials -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="justify-content:center;">CLIENT WORDS</div>
+      <h2>Kind words from our guests</h2>
+      <p style="font-size:12.5px; opacity:0.65;">Sample placeholders — swap in your real client reviews.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"My bridal look stayed perfect all day — the team really listened to what I wanted."</p>
+        <div class="testi-who"><div class="testi-avatar">A</div><span>Add client name</span></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Warm, welcoming, and genuinely skilled. My hair colour has never looked this good."</p>
+        <div class="testi-who"><div class="testi-avatar">S</div><span>Add client name</span></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"A calm, private space with real attention to detail. Highly recommend for any occasion."</p>
+        <div class="testi-who"><div class="testi-avatar">M</div><span>Add client name</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- contact -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="eyebrow">GET IN TOUCH</div>
+      <h2 style="font-size:clamp(26px,3.6vw,38px); margin-top:14px;">Book your visit</h2>
+      <p style="color:#d8c8bf; margin-top:14px; line-height:1.7; font-size:14.5px;">Confirm your appointment on WhatsApp or by phone — our team will help you choose the right service and time.</p>
+
+      <div style="margin-top:22px;">
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+          <div><b>Phone / WhatsApp</b><span>0310&nbsp;8173238</span></div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><b>Location</b><span>Attock, Punjab, Pakistan<br><em style="opacity:0.7;">(confirm exact street address)</em></span></div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <div><b>Hours</b><span>Open Daily · 10:00 AM – 8:00 PM<br><em style="opacity:0.7;">(confirm actual hours)</em></span></div>
+        </div>
+      </div>
+
+      <div class="hero-cta" style="margin-top:26px;">
+        <a class="btn solid" href="https://wa.me/923108173238" target="_blank">Chat on WhatsApp</a>
+        <a class="btn" style="border-color:var(--gold-light); color:var(--gold-light);" href="tel:03108173238">Call Now</a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="contact-photo">
+        <img src="https://images.unsplash.com/photo-1753597944233-d12e4aa49bd8?auto=format&fit=crop&w=900&q=80" alt="Bridal detail">
+      </div>
+      <div class="map-frame">
+        <iframe src="https://www.google.com/maps?q=33.2359407,72.2739244&z=15&output=embed" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo-word">Almarouf<small>BEAUTY SALON</small></div>
+    <div class="foot-links">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="foot-note">© 2026 Almarouf Beauty Salon, Attock. All rights reserved. Photography: Unsplash contributors, used under the Unsplash License.</div>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/923108173238" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 2C8.3 2 2 8.3 2 16c0 2.8.8 5.5 2.4 7.8L2 30l6.4-2.3c2.2 1.3 4.8 2 7.6 2 7.7 0 14-6.3 14-14S23.7 2 16 2zm0 25.4c-2.4 0-4.7-.7-6.7-1.9l-.5-.3-4 1.4 1.4-3.9-.3-.5C4.6 20.3 4 18.2 4 16 4 9.4 9.4 4 16 4s12 5.4 12 12-5.4 11.4-12 11.4zm6.3-8.6c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.8-1.9-1.1-2.6-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.8 5.1.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 2-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>
+</a>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const med = document.getElementById('medallion');
+  const medOuter = document.querySelector('.medallion-outer');
+  if(medOuter){
+    medOuter.addEventListener('mousemove', (e)=>{
+      const r = medOuter.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width - 0.5;
+      const py = (e.clientY - r.top)/r.height - 0.5;
+      med.style.transform = `rotateX(${py*-14}deg) rotateY(${px*18}deg)`;
+    });
+    medOuter.addEventListener('mouseleave', ()=>{ med.style.transform = 'rotateX(0deg) rotateY(0deg)'; });
+  }
+
+  const burger = document.querySelector('.burger');
+  if(burger){
+    burger.addEventListener('click', ()=>{
+      const nl = document.querySelector('nav.links');
+      const show = nl.style.display !== 'flex';
+      nl.style.display = show ? 'flex' : 'none';
+      nl.style.position='absolute'; nl.style.top='60px'; nl.style.right='32px';
+      nl.style.background='#fff'; nl.style.border='1px solid var(--line)';
+      nl.style.flexDirection='column'; nl.style.padding='18px 24px'; nl.style.gap='16px';
+      nl.style.borderRadius='4px';
+    });
+  }
+</script>
+
+</body>
+</html>
